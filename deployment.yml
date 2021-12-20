@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-frontend-2-deployment
+  labels:
+    app: docker-frontend-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: docker-frontend-2
+  template:
+    metadata:
+      labels:
+        name: docker-frontend-2
+    spec:
+      containers:
+      - name: docker-frontend-2-app
+        image: registry.gitlab.envent.ru/root/docker-frontend-2:1.0
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 90
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 90
+          periodSeconds: 10
+      imagePullSecrets:
+      - name: gitlab-registry

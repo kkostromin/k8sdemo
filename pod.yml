@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-frontend-2
+spec:
+  containers:
+  - name: docker-frontend-2-app
+    image: registry.gitlab.envent.ru/root/docker-frontend-2:1.0
+  imagePullSecrets:
+  - name: gitlab-registry
